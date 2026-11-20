@@ -1,0 +1,13 @@
+name: scheduler-control-37
+
+on:
+  schedule:
+    - cron: '37 * * * *'   # same slot as n06
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workload:
+    uses: ./.github/workflows/_control.yml
