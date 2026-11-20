@@ -1,0 +1,29 @@
+# Heavy workload: a backup-like job that runs for at least 20 minutes.
+# Each round creates 100 MB of data, compresses it, verifies it and deletes it.
+name: _heavy
+
+on:
+  workflow_call:
+
+env:
+  MIN_SECONDS: 1200
+
+jobs:
+  heavy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Create, compress and verify backups
+        run: |
+          file="$RUNNER_TEMP/data.txt"
+          end=$((SECONDS + MIN_SECONDS))
+          while [ "$SECONDS" -lt "$end" ]; do
+            head -c 100M /dev/urandom | base64 > "$file"
+            xz -6 -T1 "$file"
+            xz -t "$file.xz"
+            rm -f "$file.xz"
+          done
+
+      - name: Clean up
+        if: always()
+        run: rm -f "$RUNNER_TEMP"/data.txt*

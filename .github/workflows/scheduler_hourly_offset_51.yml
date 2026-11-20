@@ -1,0 +1,13 @@
+  name: native_hourly_offset_51
+
+  on:
+    schedule:
+        - cron: '51 * * * *'
+    workflow_dispatch:
+
+
+  jobs:
+   workload:
+    uses: ./.github/workflows/_medium.yml
+
+        

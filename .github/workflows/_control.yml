@@ -1,0 +1,24 @@
+
+name: _control
+
+on:
+  workflow_call:
+
+env:
+  SLEEP_SECONDS: 120  
+
+jobs:
+  control:
+    runs-on: ${{ vars.TEST_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 5
+    steps:
+      - name: Log trigger info
+        run: |
+          echo "workflow=${{ github.workflow }}"
+          echo "event=${{ github.event_name }}"
+          echo "schedule=${{ github.event.schedule }}"
+          echo "runner=${{ runner.name }}"
+          echo "job_start_utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+      - name: Sleep
+        run: sleep "$SLEEP_SECONDS"

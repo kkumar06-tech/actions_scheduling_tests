@@ -1,0 +1,13 @@
+name: n09-native-daily
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # 00:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workload:
+    uses: ./.github/workflows/_heavy.yml

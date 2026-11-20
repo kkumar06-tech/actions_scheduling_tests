@@ -1,0 +1,20 @@
+# Medium workload: hashes random data for at least 10 minutes.
+name: _medium
+
+on:
+  workflow_call:
+
+env:
+  MIN_SECONDS: 600
+
+jobs:
+  medium:
+    runs-on: ${{ vars.TEST_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 20
+    steps:
+      - name: Hash random data
+        run: |
+          end=$((SECONDS + MIN_SECONDS))
+          while [ "$SECONDS" -lt "$end" ]; do
+            head -c 100M /dev/urandom | sha256sum > /dev/null
+          done

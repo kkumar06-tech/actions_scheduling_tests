@@ -1,0 +1,13 @@
+name: n08-native-twice-daily
+
+on:
+  schedule:
+    - cron: '19 */12 * * *'   # 00:19 and 12:19 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workload:
+    uses: ./.github/workflows/_heavy.yml
