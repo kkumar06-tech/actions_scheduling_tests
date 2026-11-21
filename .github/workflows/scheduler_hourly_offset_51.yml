@@ -8,6 +8,6 @@
 
   jobs:
    workload:
-    uses: ./.github/workflows/_medium.yml
+    uses: ./.github/workflows/workload_medium.yml
 
         

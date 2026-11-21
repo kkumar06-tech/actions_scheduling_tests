@@ -10,4 +10,4 @@ permissions:
 
 jobs:
   workload:
-    uses: ./.github/workflows/_control.yml
+    uses: ./.github/workflows/workload_control.yml

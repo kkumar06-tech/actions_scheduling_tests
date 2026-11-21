@@ -7,4 +7,4 @@ on:
 
 jobs:
   workload:
-    uses: ./.github/workflows/_light.yml
+    uses: ./.github/workflows/workload_light.yml
