@@ -1,4 +1,4 @@
-name: native-hourly-00
+name: scheduler_hourly
 
 on:
   schedule:

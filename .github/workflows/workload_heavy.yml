@@ -1,6 +1,6 @@
 # Heavy workload: a backup-like job that runs for at least 20 minutes.
 # Each round creates 100 MB of data, compresses it, verifies it and deletes it.
-name: _heavy
+name: workload_heavy
 
 on:
   workflow_call:

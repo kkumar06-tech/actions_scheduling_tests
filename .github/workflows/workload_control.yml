@@ -1,5 +1,5 @@
 
-name: _control
+name: workload_control
 
 on:
   workflow_call:

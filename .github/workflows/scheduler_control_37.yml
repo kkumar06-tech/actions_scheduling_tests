@@ -1,4 +1,4 @@
-name: scheduler-control-37
+name: scheduler_control_37
 
 on:
   schedule:

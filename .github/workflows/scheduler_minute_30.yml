@@ -1,4 +1,4 @@
-name: native-minutely-30
+name: scheduler_minute_30
 
 on:
   schedule:

@@ -1,4 +1,4 @@
-  name: native_hourly_offset_19
+  name: scheduler_hourly_offset_19
 
   on:
     schedule:

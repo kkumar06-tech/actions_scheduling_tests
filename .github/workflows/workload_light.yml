@@ -1,5 +1,5 @@
 # Light workload: hashes random data for at least 40 seconds.
-name: _light
+name: workload_light
 
 on:
   workflow_call:

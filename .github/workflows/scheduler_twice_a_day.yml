@@ -1,4 +1,4 @@
-name: n08-native-twice-daily
+name: scheduler_twice_a_day
 
 on:
   schedule:

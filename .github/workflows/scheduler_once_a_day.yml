@@ -1,4 +1,4 @@
-name: n09-native-daily
+name: scheduler_once_a_day
 
 on:
   schedule:

@@ -1,5 +1,5 @@
 # Medium workload: hashes random data for at least 10 minutes.
-name: _medium
+name: workload_medium
 
 on:
   workflow_call:
@@ -9,7 +9,7 @@ env:
 
 jobs:
   medium:
-    runs-on: ${{ vars.TEST_RUNNER || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - name: Hash random data
