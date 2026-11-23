@@ -1,0 +1,17 @@
+name: external_twice_a_day
+run-name: external_twice_a_day ${{ inputs.dispatch_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      dispatch_id:
+        description: Unique ID set by the external scheduler
+        required: false
+        default: manual
+
+permissions:
+  contents: read
+
+jobs:
+  workload:
+    uses: ./.github/workflows/workload_heavy.yml

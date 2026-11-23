@@ -1,0 +1,18 @@
+# Triggered by the external scheduler every hour at :19 (mirror of n05)
+name: external_hourly_offset_19
+run-name: external_hourly_offset_19 ${{ inputs.dispatch_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      dispatch_id:
+        description: Unique ID set by the external scheduler
+        required: false
+        default: manual
+
+permissions:
+  contents: read
+
+jobs:
+  workload:
+    uses: ./.github/workflows/workload_medium.yml

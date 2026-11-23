@@ -1,4 +1,4 @@
-name: scheduler_minute_30
+name: scheduler_minutely_30
 
 on:
   schedule:
