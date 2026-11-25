@@ -1,5 +1,5 @@
 # Workflow for scheduler testing to simulate different workload types
-name: Scheduler Testing Generic
+name: Generic
 
 on:
     workflow_call:
@@ -10,7 +10,7 @@ on:
                 type: string
             runs_on:
                 type: string
-                default: ubunut-latest
+                default: ubuntu-latest
             
 jobs:
     workload:
