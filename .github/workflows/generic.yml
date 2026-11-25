@@ -1,0 +1,62 @@
+# Workflow for scheduler testing to simulate different workload types
+name: Scheduler Testing Generic
+
+on:
+    workflow_call:
+        inputs:
+            workload_type:
+                description: Type of workload to test
+                required: true
+                type: string
+            runs_on:
+                type: string
+                default: arc-runners-devops
+            
+jobs:
+    workload:
+        name: Run workload
+        runs-on: ${{ inputs.runs_on }}
+        env:
+            WORKLOAD_TYPE: ${{ inputs.workload_type }}
+        steps:
+            - name: Reject invalid workload type
+              if: ${{ env.WORKLOAD_TYPE != 'light' && env.WORKLOAD_TYPE != 'medium' && env.WORKLOAD_TYPE != 'heavy' }}
+              run: |
+                echo "Invalid workload type: $WORKLOAD_TYPE"
+                exit 1
+
+            - name: Set minimum time to run
+              run: |
+                if [ "$WORKLOAD_TYPE" = "light" ]; then
+                  echo "MIN_SECONDS=40" >> "$GITHUB_ENV"
+                elif [ "$WORKLOAD_TYPE" = "medium" ]; then
+                  echo "MIN_SECONDS=600" >> "$GITHUB_ENV"
+                elif [ "$WORKLOAD_TYPE" = "heavy" ]; then
+                  echo "MIN_SECONDS=1200" >> "$GITHUB_ENV"
+                fi
+
+            - name: Run the workload
+              run: |
+                if [ "$WORKLOAD_TYPE" != "heavy" ]; then
+                   end=$((SECONDS + $MIN_SECONDS))
+                   while [ "$SECONDS" -lt "$end" ]; do
+                     head -c 100M /dev/urandom | sha256sum > /dev/null
+                   done
+                else
+                   file="$RUNNER_TEMP/data.txt"
+                   end=$((SECONDS + $MIN_SECONDS))
+                   while [ "$SECONDS" -lt "$end" ]; do
+                     head -c 100M /dev/urandom | base64 > "$file"
+                     xz -6 -T1 "$file"
+                     xz -t "$file.xz"
+                     rm -f "$file.xz"
+                   done
+                fi
+
+            - name: Cleanup
+              if: ${{ always() && env.WORKLOAD_TYPE == 'heavy' }}
+              run: rm -f "$RUNNER_TEMP/data.txt" "$RUNNER_TEMP/data.txt.xz"
+
+
+
+

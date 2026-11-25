@@ -1,0 +1,12 @@
+name: scheduler_hourly_offset_05
+
+on:
+  schedule:
+    - cron: '5 * * * *'
+  workflow_dispatch:        
+
+jobs:
+  workload:
+    uses: ./.github/workflows/generic.yml
+    with:
+      workload_type: light
