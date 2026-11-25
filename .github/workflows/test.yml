@@ -8,4 +8,4 @@ jobs:
   workload:
     uses: ./.github/workflows/generic.yml
     with:
-      workload_type: light
+      workload_type: medium
