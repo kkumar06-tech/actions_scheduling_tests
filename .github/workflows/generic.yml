@@ -10,7 +10,7 @@ on:
                 type: string
             runs_on:
                 type: string
-                default: arc-runners-devops
+                default: ubunut-latest
             
 jobs:
     workload:
